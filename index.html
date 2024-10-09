@@ -1,0 +1,367 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Document</title>
+
+    <style>
+        body {
+            background-image: url(/img/bg.png);
+        }
+
+        .container {
+            width: 1850px;
+            margin: 0 auto;
+        }
+
+        .header .title{
+            width: 896px;
+            height: 130px;
+
+            margin: 0 auto;
+            background-image: url(/img/header-bg.png);
+            background-repeat: no-repeat;
+
+            padding-top: 10px;
+        }
+
+        .header .title h1 {
+            text-align: center;
+            font-weight: 700;
+            color: rgba(0, 236, 252, 1);
+            font-size: 26.68px;
+        }
+
+        .header .title .title-nav {
+            width: 598px;
+            margin: 0 auto;
+
+            padding-top: 10px;
+
+            display: flex;
+            flex-direction: row;
+            justify-content: space-evenly;
+        }
+
+        .header .title .title-nav a {
+            text-decoration: none;
+            color: rgba(2, 154, 255, 1);
+            font-size: 17.75px;
+        }
+
+        .body {
+            width: 1800px;
+            padding: 20px;
+
+            /* background-color: orange; */
+
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        #city {
+            width: 400px;
+            height: 420px;
+            border: 2px solid #0B318F;
+        }
+
+        #salary {
+            width: 1350px;
+            height: 420px;
+            border: 2px solid #0B318F;
+        }
+
+        #company,
+        #skill {
+            width: 850px;
+            height: 420px;
+            /* border: 2px solid red; */
+            margin-top: 20px;
+        }
+
+
+    </style>
+
+</head>
+
+<body>
+
+
+    <div class="container">
+        <!-- 头部 -->
+        <div class="header">
+            <div class="title">
+                <h1>大数据招聘岗位数据分析</h1>
+                <div class="title-nav">
+                    <a href="">重点关注1</a>
+                    <a href="">重点关注2</a>
+                    <a href="">重点关注3</a>
+                    <a href="">重点关注4</a>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- 内容 -->
+        <div class="body">
+            <div id="city"></div>
+            <div id="salary"></div>
+            <div id="company"></div>
+            <div id="skill"></div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+    <script src="js/echarts.min.js"></script>
+    <script src="js/echarts-wordcloud.min.js"></script>
+
+    <script>
+        let pieData = [
+            { name: '北京', value: '112' },
+            { name: '上海', value: '65' },
+            { name: '深圳', value: '62' },
+            { name: '广州', value: '32' },
+            { name: '杭州', value: '25' },
+            { name: '西安', value: '24' },
+            { name: '武汉', value: '19' },
+            { name: '南京', value: '18' },
+            { name: '成都', value: '17' },
+            { name: '重庆', value: '12' },
+            { name: '长沙', value: '11' },
+            { name: '郑州', value: '8' },
+            { name: '苏州', value: '6' },
+            { name: '合肥', value: '4' },
+            { name: '佛山', value: '4' },
+            { name: '贵阳', value: '4' },
+            { name: '厦门', value: '4' },
+            { name: '青岛', value: '3' },
+            { name: '大连', value: '2' },
+            { name: '南宁', value: '2' },
+            { name: '东莞', value: '2' },
+            { name: '无锡', value: '2' },
+            { name: '中山', value: '2' },
+            { name: '福州', value: '1' },
+            { name: '沈阳', value: '1' },
+            { name: '日照', value: '1' },
+            { name: '长春', value: '1' },
+            { name: '常州', value: '1' },
+            { name: '宜昌', value: '1' },
+            { name: '安庆', value: '1' },
+            { name: '太原', value: '1' },
+            { name: '天津', value: '1' },
+            { name: '香港', value: '1' }
+        ]
+
+        let cityDoc = document.getElementById("city")
+        let chartCity = echarts.init(cityDoc)
+        let cityOption = {
+            title: {
+                text: '分析大数据职位的区域分布情况',
+                left: 'center',
+                top: 20,
+                left: 20,
+                textStyle: {
+                    color: '#029AFF'
+                }
+            },
+            legend: {
+                orient: 'vertical',
+                right: 20,
+                top: 20,
+                textStyle: {
+                    color: '#029AFF'
+                }
+            },
+            tooltip: {
+                trigger: 'item'
+            },
+            series: [
+                {
+                    name: '职位区域',
+                    type: 'pie',
+                    radius: ['40%', '70%'],
+                    center: ['40%', '60%'],
+                    itemStyle: {
+                        borderRadius: 10,
+                        borderColor: '#101123',
+                        borderWidth: 2
+                    },
+                    data: pieData.slice(0, 8),
+                    label: {
+                        show: false
+                    }
+                }
+            ]
+        };
+        chartCity.setOption(cityOption)
+
+
+        let xData = ['15k-30k', '20k-40k', '15k-25k', '20k-30k', '20k-35k', '25k-50k', '25k-35k', '30k-50k', '6k-8k', '12k-20k', '15k-20k', '25k-40k', '10k-20k', '10k-15k', '20k-25k', '30k-60k', '12k-18k', '8k-15k', '30k-45k', '8k-12k', '18k-30k', '30k-40k', '10k-18k', '25k-30k', '11k-13k', '2k-3k', '4k-6k', '18k-25k', '8k-13k', '11k-22k', '5k-10k', '12k-15k', '7k-10k', '35k-55k', '18k-20k', '30k-35k', '12k-24k', '20k-28k', '10k-16k', '10k-14k', '19k-28k', '35k-70k', '18k-35k', '13k-26k', '40k-60k', '15k-22k', '25k-45k', '16k-21k', '40k-70k', '27k-35k', '6k-10k', '18k-22k', '6k-9k', '18k-23k', '35k-65k', '13k-18k', '13k-25k', '12k-17k', '12k-16k', '14k-16k', '8k-16k', '14k-19k', '9k-15k', '9k-14k', '9k-12k', '9k-11k', '8k-14k', '8k-11k', '7k-14k', '5k-9k', '5k-8k', '5k-7k', '5k-6k', '45k-60k', '3k-4k', '30k-55k', '2k-4k', '24k-40k', '23k-30k', '22k-30k', '21k-35k', '21k-25k', '20k-27k', '20k-22k', '1k-2k', '19k-35k', '19k-30k', '19k-23k', '18k-36k', '18k-27k', '17k-34k', '17k-29k', '17k-27k', '17k-25k', '17k-24k', '17k-21k', '16k-30k', '16k-28k', '16k-25k', '16k-20k', '16k-17k', '15k-24k', '15k-18k', '15k-17k', '14k-26k', '14k-25k', '14k-22k', '14k-18k', '14k-17k', '13k-20k', '13k-19k', '12k-14k', '11k-20k', '11k-19k', '11k-16k', '11k-15k', '11k-14k', '10k-13k']
+        let yData = [132, 111, 70, 69, 44, 43, 39, 34, 32, 32, 32, 31, 23, 23, 23, 19, 19, 17, 15, 13, 8, 8, 7, 7, 6, 6, 6, 5, 5, 4, 4, 3, 3, 3, 3, 3, 3, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+        let salaryDoc = document.getElementById("salary")
+        let chartSalary = echarts.init(salaryDoc)
+        let salaryOption = {
+            title: {
+                text: '分析大数据职位薪资区间分布情况',
+                top: 20,
+                left: 20,
+                textStyle: {
+                    color: '#029AFF'
+                }
+            },
+            tooltip: {
+                trigger: 'item'
+            },
+            xAxis: {
+                type: "category",
+                data: xData.slice(0, 17),
+                axisLabel: {
+                    color: '#9CC3DA'
+                },
+                axisTick: {
+                    show: false
+                },
+                splitLine: {
+                    show: true,
+                    lineStyle: {
+                        widyh: 2,
+                        type: 'solid',
+                        color: '#3C4B74'
+                    }
+                }
+            },
+            yAxis: {
+                type: "value",
+                axisLabel: {
+                    color: "#9CC3DA"
+                },
+                axisTick: {
+                    show: false
+                },
+                splitLine: {
+                    show: true,
+                    lineStyle: {
+                        widyh: 2,
+                        type: 'solid',
+                        color: '#3C4B74'
+                    }
+                }
+            },
+            series: [
+                {
+                    type: 'bar',
+                    barWidth: 40, //柱图宽度
+                    blur: {
+                        label: {
+                            show: true,
+                            color: 'red',
+                            position: 'top'
+                        }
+                    },
+                    itemStyle:{
+                        borderRadius: 10,
+                        color: {
+                            type: 'linear',
+                            x: 0,
+                            y: 0,
+                            x2: 0,
+                            y2: 1,
+                            colorStops: [{
+                                offset: 0, color: '#41D5D5' // 0% 处的颜色
+                            },{
+                                offset: 1, color: '#46BCF9' // 100% 处的颜色
+                            }],
+                            global: false // 缺省为 false
+                            }
+                    },
+                    data: yData.slice(0, 17)
+                }
+            ]
+        };
+        chartSalary.setOption(salaryOption)
+
+
+        let companyWordCloudData = [{ name: '带薪年假', value: '132' }, { name: '绩效奖金', value: '111' }, { name: '年底双薪', value: '70' }, { name: '技能培训', value: '69' }, { name: '定期体检', value: '44' }, { name: '弹性工作', value: '43' }, { name: '免费班车', value: '39' }, { name: '节日礼物', value: '34' }, { name: '年度体检', value: '32' }, { name: '就近租房补贴', value: '32' }, { name: '节日礼品', value: '32' }, { name: '股票期权', value: '31' }, { name: '午餐补助', value: '23' }, { name: '交通补助', value: '23' }, { name: '五险一金', value: '23' }, { name: '年度旅游', value: '19' }, { name: '专项奖金', value: '19' }, { name: '扁平管理', value: '17' }, { name: '岗位晋升', value: '15' }, { name: '通讯津贴', value: '13' }, { name: '福利完善', value: '8' }, { name: '国际化平台', value: '8' }, { name: '美女多', value: '7' }, { name: '领导好', value: '7' }, { name: '帅哥多', value: '6' }, { name: '管理规范', value: '6' }, { name: '六险一金', value: '6' }, { name: '晋升机制佳', value: '5' }, { name: '公司氛围好', value: '5' }, { name: '扁平化管理', value: '4' }, { name: '年终分红', value: '4' }, { name: '餐费补贴', value: '3' }, { name: '补充商业险', value: '3' }, { name: '全额五险一金', value: '3' }, { name: '互联网金融', value: '3' }, { name: '丰富技术交流', value: '3' }, { name: '丰厚年终', value: '3' }, { name: '补充商业保险', value: '2' }, { name: '周末双休', value: '2' }, { name: '极客氛围', value: '1' }, { name: '海内外旅游', value: '1' }, { name: '绩效奖金 ', value: '1' }, { name: '国际龙头企业', value: '1' }, { name: '节日津贴', value: '1' }, { name: '商业保险', value: '1' }, { name: '员工生日会', value: '1' }, { name: '发展机会', value: '1' }, { name: '双休', value: '1' }, { name: '节日福利', value: '1' }, { name: '补充医疗', value: '1' }, { name: '项目提成', value: '1' }, { name: '通讯津贴 ', value: '1' }, { name: '顶级银行工程', value: '1' }, { name: '五险二金', value: '1' }, { name: '五险一金 ', value: '1' }, { name: '项目奖金', value: '1' }, { name: 'SaaS平台', value: '1' }, { name: '15天年假', value: '1' }, { name: '13-15薪', value: '1' }, { name: '专项奖金 ', value: '1' }, { name: '年终奖金', value: '1' }, { name: '弹性工作时间', value: '1' }, { name: '技术大牛', value: '1' }, { name: '持续盈利', value: '1' }]
+        let companyDoc = document.getElementById("company")
+        let chartCompany = echarts.init(companyDoc)
+        let companyOption = {
+            title: {
+                text: '分析大数据职位相关公司的福利情况\n',
+                top: 20,
+                left: 20,
+                textStyle: {
+                    color: "#029AFF"
+                }
+            },
+            tooltip: {
+                trigger: 'item'
+            },
+            shape: "diamond",
+            series: [
+                {
+                    type: 'wordCloud',
+                    data: companyWordCloudData,
+                    textStyle: {
+                        color: function () {
+                            return 'rgb(' + [
+                                Math.round(Math.random() * 160),
+                                Math.round(Math.random() * 160),
+                                Math.round(Math.random() * 160)
+                            ].join(',') + ')';
+                        }
+                    }
+                }
+            ]
+        };
+        chartCompany.setOption(companyOption)
+
+        let skillWordCloudData = [{ name: 'java', value: '28' }, { name: 'sql', value: '25' }, { name: '计算机', value: '23' }, { name: '数据库', value: '20' }, { name: '数据挖掘', value: '19' }, { name: '大数据', value: '15' }, { name: '数据分析', value: '15' }, { name: 'mysql', value: '15' }, { name: '数据仓库', value: '9' }, { name: 'oracle', value: '9' }, { name: 'Hadoop', value: '7' }, { name: 'kafka', value: '6' }, { name: 'linux', value: '6' }, { name: 'Java', value: '6' }, { name: 'spark', value: '6' }, { name: 'hadoop', value: '5' }, { name: '数据开发', value: '5' }, { name: '软件开发', value: '4' }, { name: 'flink', value: '4' }, { name: 'Scala', value: '4' }, { name: 'shell', value: '4' }, { name: '金融', value: '4' }, { name: '数仓架构', value: '3' }, { name: '运维', value: '3' }, { name: '测试', value: '3' }, { name: 'Spark', value: '3' }, { name: '项目开发', value: '3' }, { name: 'hive', value: '3' }, { name: '大数据分析', value: '3' }, { name: '大数据开发', value: '3' }, { name: '开发', value: '3' }, { name: 'c++', value: '3' }, { name: 'MongoDB', value: '3' }, { name: '需求分析', value: '3' }, { name: '培训', value: '2' }, { name: '运营', value: '2' }, { name: '研发', value: '2' }, { name: '数据治理', value: '2' }, { name: '数据建模', value: '2' }, { name: '数仓建模', value: '2' }, { name: '技术方案', value: '2' }, { name: '大数据应用', value: '2' }, { name: '大数据平台', value: '2' }, { name: '后端开发', value: '2' }, { name: '信息技术', value: '2' }, { name: 'scala', value: '2' }, { name: 'kettle', value: '2' }, { name: 'hbase', value: '2' }, { name: 'excel', value: '2' }, { name: 'etl', value: '2' }, { name: 'Hive', value: '2' }, { name: '软件工程', value: '1' }, { name: '数据监管', value: '1' }, { name: '寿险', value: '1' }, { name: '大数据技术', value: '1' }, { name: '数据统计', value: '1' }, { name: '达梦', value: '1' }, { name: 'Python', value: '1' }, { name: '大数据处理', value: '1' }, { name: '数据解决方案', value: '1' }, { name: '数据设计', value: '1' }, { name: '数据集市', value: '1' }, { name: '团队建设', value: '1' }, { name: '通信', value: '1' }, { name: '前端开发', value: '1' }, { name: '分析报告', value: '1' }, { name: '分析建模', value: '1' }, { name: '信息系统', value: '1' }, { name: 'Linux系统', value: '1' }, { name: '供应链', value: '1' }, { name: '代码开发', value: '1' }, { name: '人工智能', value: '1' }, { name: '云开发', value: '1' }, { name: 'teamcenter', value: '1' }, { name: 'sqoop', value: '1' }, { name: '架构设计', value: '1' }, { name: 'springboot', value: '1' }, { name: '电子政务', value: '1' }, { name: '监控', value: '1' }, { name: '银行', value: '1' }, { name: 'redis', value: '1' }, { name: 'python', value: '1' }, { name: 'ppt', value: '1' }, { name: 'php', value: '1' }, { name: '监管报送', value: '1' }, { name: 'nosql', value: '1' }, { name: '算法模型', value: '1' }, { name: 'mybatis', value: '1' }, { name: 'mapreduce', value: '1' }, { name: '系统开发', value: '1' }, { name: 'AI', value: '1' }, { name: '经营决策', value: '1' }, { name: 'jvm', value: '1' }, { name: '统计学', value: '1' }, { name: 'ifrs17', value: '1' }, { name: 'html', value: '1' }, { name: '编程', value: '1' }, { name: 'hdfs', value: '1' }, { name: '阿里云', value: '1' }, { name: 'hadoop生态', value: '1' }, { name: '自动化', value: '1' }, { name: 'git', value: '1' }, { name: '调试', value: '1' }, { name: 'ETL数据清洗', value: '1' }, { name: 'etl开发', value: '1' }, { name: 'etl工程师', value: '1' }, { name: 'ETL', value: '1' }, { name: 'docker', value: '1' }, { name: 'dataworks', value: '1' }, { name: 'css', value: '1' }, { name: '财务', value: '1' }, { name: '数据处理', value: '1' }, { name: '数据同步', value: '1' }, { name: '数据平台搭建', value: '1' }, { name: '数据架构', value: '1' }, { name: '数据交互', value: '1' }, { name: '数据模型', value: '1' }, { name: '数仓建设维护', value: '1' }, { name: 'bug', value: '1' }, { name: '数仓工程师', value: '1' }, { name: '教学', value: '1' }, { name: '招投标', value: '1' }, { name: '报表', value: '1' }]
+
+        let skillDoc = document.getElementById("skill")
+        let chartSkill = echarts.init(skillDoc)
+        let skillOption = {
+            title: {
+                text: '职位的技能标签',
+                top: 20,
+                left: 20,
+                textStyle: {
+                    color: "#029AFF"
+                }
+            },
+            tooltip: {
+                trigger: 'item'
+            },
+            shape: "diamond",
+            series: [
+                {
+                    type: 'wordCloud',
+                    data: skillWordCloudData,
+                    textStyle: {
+                        color: function () {
+                            return 'rgb(' + [
+                                Math.round(Math.random() * 160),
+                                Math.round(Math.random() * 160),
+                                Math.round(Math.random() * 160)
+                            ].join(',') + ')';
+                        }
+                    }
+                }
+            ]
+        };
+        chartSkill.setOption(skillOption)
+
+    </script>
+
+
+</body>
+
+</html>
